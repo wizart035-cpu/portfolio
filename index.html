@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Portfolio | AI Automation & Animation</title>
+
+    <!-- Premium Fonts: Outfit for a soft, modern, geometric feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        surface: '#F8FAFC',
+                        card: '#FFFFFF',
+                        textMain: '#0F172A',
+                        textMuted: '#475569',
+                        brand: {
+                            light: '#E0E7FF',
+                            DEFAULT: '#4F46E5', /* Indigo */
+                            dark: '#312E81',
+                        },
+                        accent: {
+                            DEFAULT: '#F43F5E', /* Rose */
+                            light: '#FFE4E6'
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(0, 0, 0, 0.05)',
+                        'soft-hover': '0 30px 60px -15px rgba(79, 70, 229, 0.12)',
+                        'float': '0 15px 35px -5px rgba(79, 70, 229, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Soft Premium Base */
+        body {
+            background-color: var(--tw-colors-surface);
+            color: var(--tw-colors-textMain);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Scroll Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, #4F46E5, #F43F5E);
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+
+        /* Clean Navbar & Auto-hide feature */
+        .nav-blur {
+            background: rgba(248, 250, 252, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            transition: transform 0.4s cubic-bezier(0.3, 0, 0.2, 1), background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Premium Card Styling */
+        .premium-card {
+            background: var(--tw-colors-card);
+            border-radius: 1.5rem;
+            box-shadow: var(--tw-shadow-soft);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--tw-shadow-soft-hover);
+            border-color: rgba(79, 70, 229, 0.1);
+        }
+
+        /* Subtle Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #4F46E5 0%, #F43F5E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Avatar Animation */
+        .avatar-wrap {
+            animation: gentleFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes gentleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Scroll Reveal System */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Infinite Marquee */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .marquee-content {
+            display: inline-flex;
+            gap: 4rem;
+            animation: marquee 25s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Terminal Console */
+        .terminal-line {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #22c55e;
+            width: 0;
+            animation: typing 2s steps(40, end) forwards, blink 1s step-end infinite;
+        }
+
+        .terminal-line-1 {
+            animation-delay: 0s;
+        }
+
+        .terminal-line-2 {
+            animation-delay: 2.5s;
+            opacity: 0;
+            animation: appear 0.1s forwards 2.5s, typing 2s steps(40, end) forwards 2.5s, blink 1s step-end infinite 2.5s;
+        }
+
+        .terminal-line-3 {
+            animation-delay: 5s;
+            opacity: 0;
+            animation: appear 0.1s forwards 5s, typing 2s steps(40, end) forwards 5s, blink 1s step-end infinite 5s;
+            border-right: none;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #22c55e
+            }
+        }
+
+        @keyframes appear {
+            to {
+                opacity: 1
+            }
+        }
+
+        /* Chatbot UI Animations */
+        #chatbot-window {
+            transform-origin: bottom right;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #chatbot-window.active {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .chat-bubble {
+            animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.9);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .typing-dot {
+            animation: chatBlink 1.4s infinite both;
+        }
+
+        .typing-dot:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes chatBlink {
+
+            0%,
+            80%,
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+
+            40% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Avatar Ripple Animation */
+        @keyframes avatarRipple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.6;
+                stroke-width: 4px;
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+                stroke-width: 1px;
+            }
+        }
+
+        .avatar-ripple {
+            transform-origin: 100px 90px;
+            animation: avatarRipple 3s infinite ease-out;
+        }
+
+        .avatar-ripple-2 {
+            transform-origin: 100px 90px;
+            animation: avatarRipple 3s infinite ease-out 1.5s;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-brand selection:text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 nav-blur py-4 px-6 md:px-12 transform translate-y-0 mt-1">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight text-textMain">
+                Aryan <span class="text-brand">Portfolio</span>
+            </a>
+
+            <div class="hidden md:flex space-x-10 text-sm font-semibold tracking-wide text-textMuted uppercase">
+                <a href="#about" class="hover:text-brand transition-colors">Profile</a>
+                <a href="#process" class="hover:text-brand transition-colors">Process</a>
+                <a href="#projects" class="hover:text-brand transition-colors">Projects</a>
+                <a href="#ai-codex" class="hover:text-accent flex items-center gap-2 transition-colors">
+                    <i class="fa-solid fa-book-open-reader"></i> Learn AI
+                </a>
+            </div>
+
+            <a href="mailto:wizart035@gmail.com"
+                class="hidden md:inline-flex bg-textMain text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-brand transition-all duration-300 shadow-lg shadow-gray-200">
+                Contact Me
+            </a>
+        </div>
+    </nav>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="min-h-[90vh] flex flex-col justify-center pt-28 pb-10 px-6 relative">
+        <div
+            class="absolute top-0 right-0 w-full md:w-1/2 h-full bg-gradient-to-bl from-brand-light/40 to-transparent -z-10 rounded-bl-[100px]">
+        </div>
+
+        <div class="max-w-7xl mx-auto w-full" id="about">
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-12 reveal">
+                <!-- UPDATED Handsome Tech Boy Avatar with Headphones & Normal Smile -->
+                <div
+                    class="avatar-wrap w-32 h-32 md:w-40 md:h-40 rounded-full bg-white shadow-soft flex items-center justify-center border-4 border-white relative overflow-hidden shrink-0">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-rose-50"></div>
+                    <!-- NEW Premium Tech/AI Architect Avatar -->
+                    <svg viewBox="0 0 200 200" class="w-[90%] h-[90%] relative z-10 translate-y-3"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <!-- Vibration/Ripple Effect -->
+                        <circle cx="100" cy="90" r="45" fill="none" stroke="#4F46E5" class="avatar-ripple" />
+                        <circle cx="100" cy="90" r="45" fill="none" stroke="#F43F5E" class="avatar-ripple-2" />
+
+                        <!-- AI Glowing Aura Background (Static base) -->
+                        <circle cx="100" cy="90" r="60" fill="#4F46E5" opacity="0.1" />
+
+                        <!-- Theme Matching Hoodie/Jacket -->
+                        <path d="M25,200 C25,140 60,115 100,115 C140,115 175,140 175,200" fill="#4F46E5" />
+                        <!-- Brand Color -->
+                        <path d="M60,200 C60,150 80,130 100,130 C120,130 140,150 140,200" fill="#312E81" />
+                        <!-- Brand Dark Color -->
+
+                        <!-- Neck & Face -->
+                        <path d="M85,130 L115,130 L115,85 L85,85 Z" fill="#FFC8A2" />
+                        <path d="M85,115 L115,115 L115,130 L85,130 Z" fill="#E5A685" opacity="0.5" />
+                        <path
+                            d="M60,65 C60,115 75,125 100,125 C125,125 140,115 140,65 C140,40 125,30 100,30 C75,30 60,40 60,65 Z"
+                            fill="#FFC8A2" />
+
+                        <!-- Ears -->
+                        <path d="M52,75 C48,75 48,90 55,95" fill="#FFC8A2" />
+                        <path d="M148,75 C152,75 152,90 145,95" fill="#FFC8A2" />
+
+                        <!-- Normal Handsome Haircut -->
+                        <path
+                            d="M55,60 C55,30 70,20 100,20 C130,20 145,30 145,60 C145,70 140,80 140,80 C140,80 145,45 100,35 C55,45 60,80 60,80 C60,80 55,70 55,60 Z"
+                            fill="#0F172A" />
+                        <path d="M45,45 C65,5 125,5 145,35 C150,20 115,-5 85,5 C55,15 40,25 45,45 Z" fill="#1E293B" />
+                        <path d="M60,35 C80,15 110,15 130,30 C120,20 90,20 70,30 Z" fill="#334155" />
+
+                        <!-- Eyebrows -->
+                        <path d="M70,68 Q80,64 90,68" fill="none" stroke="#0F172A" stroke-width="3.5"
+                            stroke-linecap="round" />
+                        <path d="M130,68 Q120,64 110,68" fill="none" stroke="#0F172A" stroke-width="3.5"
+                            stroke-linecap="round" />
+
+                        <!-- Eyes (Sharp & Confident) -->
+                        <circle cx="81" cy="80" r="3.5" fill="#1E293B" />
+                        <circle cx="82" cy="79" r="1.5" fill="#FFFFFF" />
+                        <circle cx="119" cy="80" r="3.5" fill="#1E293B" />
+                        <circle cx="120" cy="79" r="1.5" fill="#FFFFFF" />
+
+                        <!-- Nose -->
+                        <path d="M100,80 L100,98 L95,100" fill="none" stroke="#E5A685" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+
+                        <!-- Friendly, Confident Smile -->
+                        <path d="M85,110 Q100,118 115,110" fill="none" stroke="#0F172A" stroke-width="2.5"
+                            stroke-linecap="round" />
+                        <path d="M85,110 Q83,108 81,109" fill="none" stroke="#0F172A" stroke-width="1.5"
+                            stroke-linecap="round" />
+                        <path d="M115,110 Q117,108 119,109" fill="none" stroke="#0F172A" stroke-width="1.5"
+                            stroke-linecap="round" />
+
+                        <!-- Premium Over-ear Headphones -->
+                        <path d="M42,85 C42,15 158,15 158,85" fill="none" stroke="#1E293B" stroke-width="9"
+                            stroke-linecap="round" />
+                        <rect x="34" y="65" width="18" height="42" rx="8" fill="#0F172A" />
+                        <rect x="148" y="65" width="18" height="42" rx="8" fill="#0F172A" />
+                        <!-- Inner Accent -->
+                        <rect x="38" y="70" width="8" height="32" rx="4" fill="#F43F5E" />
+                        <rect x="154" y="70" width="8" height="32" rx="4" fill="#F43F5E" />
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-sm font-bold text-brand uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+                        <span class="w-8 h-[2px] bg-brand"></span> Hello, I am
+                    </h2>
+                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-extrabold text-textMain tracking-tight">
+                        Aryan Patel.
+                    </h1>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mt-8 reveal" style="transition-delay: 100ms;">
+                <div class="lg:col-span-8">
+                    <h3 class="text-3xl md:text-5xl font-bold leading-tight mb-6">
+                        I architect <span class="text-gradient">Autonomous AI Systems</span> and craft Cinematic
+                        Animations.
+                    </h3>
+                    <p class="text-xl text-textMuted leading-relaxed max-w-3xl font-light mb-6">
+                        Merging B.Com (BFSI) financial logic with advanced artificial intelligence. I build
+                        self-executing workflows and hyper-realistic digital advertisements that scale businesses and
+                        eliminate redundancy.
+                    </p>
+
+                    <ul class="flex flex-col gap-3 mb-10">
+                        <li class="flex items-center gap-3 text-lg text-textMain font-medium">
+                            <i class="fa-solid fa-circle-check text-brand"></i> Deployment of Custom AI Bots (ClawDBot,
+                            ZeroClaw)
+                        </li>
+                        <li class="flex items-center gap-3 text-lg text-textMain font-medium">
+                            <i class="fa-solid fa-circle-check text-accent"></i> Automated Task & Process Setup via n8n
+                        </li>
+                        <li class="flex items-center gap-3 text-lg text-textMain font-medium">
+                            <i class="fa-solid fa-circle-check text-green-500"></i> Generation of AI Product Video
+                            Advertisements
+                        </li>
+                    </ul>
+
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects"
+                            class="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition-colors shadow-soft flex items-center gap-2">
+                            Explore Work <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#process"
+                            class="bg-white text-textMain border border-gray-200 px-8 py-4 rounded-xl font-semibold hover:border-brand hover:text-brand transition-colors shadow-sm flex items-center gap-2">
+                            View Process
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 flex flex-col gap-4">
+                    <div class="premium-card p-6 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-brand-light text-brand flex items-center justify-center text-xl shrink-0 icon-box">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-textMain">Agentic Workflows</h4>
+                            <p class="text-sm text-textMuted">n8n & Custom Bots</p>
+                        </div>
+                    </div>
+                    <div class="premium-card p-6 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-accent-light text-accent flex items-center justify-center text-xl shrink-0 icon-box">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-textMain">Cinematic Animation</h4>
+                            <p class="text-sm text-textMuted">Blender & Adobe CC</p>
+                        </div>
+                    </div>
+                    <div class="premium-card p-6 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-xl shrink-0 icon-box">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-textMain">Financial Acumen</h4>
+                            <p class="text-sm text-textMuted">B.Com (BFSI) Logic</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- ================= LIVE AI DEMO (Groq API) ================= -->
+    <section id="live-demo"
+        class="py-24 px-6 bg-gradient-to-br from-indigo-50 to-rose-50 relative z-10 border-y border-gray-100">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-sm font-bold text-brand uppercase tracking-[0.2em] mb-2">Live Demonstration</h2>
+                <h3 class="text-4xl md:text-5xl font-extrabold text-textMain mb-4">AI Prompt Architect</h3>
+                <p class="text-textMuted leading-relaxed">Experience my prompt engineering skills live. Type a basic
+                    idea below, and my Groq-powered engine will expand it into a professional, cinematic
+                    Midjourney/Blender prompt.</p>
+            </div>
+
+            <div class="premium-card p-8 reveal flex flex-col gap-6">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <input type="text" id="demo-input"
+                        placeholder="E.g., A futuristic flying car in a cyberpunk city..."
+                        class="flex-1 bg-surface border border-gray-200 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-brand outline-none transition-all">
+                    <button id="demo-btn"
+                        class="bg-brand hover:bg-brand-dark text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap shadow-soft">
+                        Engineer Prompt
+                    </button>
+                </div>
+
+                <div id="demo-output-container" class="hidden">
+                    <h4 class="text-xs font-bold text-textMuted uppercase tracking-widest mb-2">Engineered Result:</h4>
+                    <div
+                        class="bg-gray-900 text-green-400 font-mono text-sm p-5 rounded-xl border border-gray-800 shadow-inner relative">
+                        <span id="demo-output-text">Generating...</span>
+                        <div class="absolute top-3 right-3 text-gray-500 opacity-50"><i
+                                class="fa-solid fa-terminal"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= THE AI CODEX (12 Pages - SPLIT 11 & 12) ================= -->
+    <section id="ai-codex" class="py-24 px-6 relative">
+        <!-- Center Line -->
+        <div class="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-1 bg-brand-light -translate-x-1/2 rounded-full">
+        </div>
+
+        <!-- Phase 1 (Left) -->
+        <div class="mb-12 flex flex-col md:flex-row items-center w-full reveal">
+            <div class="md:w-1/2 w-full md:pr-12 md:text-right pl-12 md:pl-0">
+                <span class="text-brand font-bold tracking-widest text-xs uppercase mb-2 block">Phase 01</span>
+                <h4 class="text-2xl font-bold text-textMain mb-3">Discovery & Financial Audit</h4>
+                <p class="text-textMuted leading-relaxed">Before writing a single prompt, I analyze your existing
+                    business flow. Using my B.Com (BFSI) background, I identify redundancies, calculate potential ROI,
+                    and map the logic.</p>
+            </div>
+            <div
+                class="absolute left-[20px] md:left-1/2 w-6 h-6 bg-white border-4 border-brand rounded-full shadow-[0_0_15px_rgba(79,70,229,0.4)] -translate-x-1/2">
+            </div>
+            <div class="md:w-1/2 w-full hidden md:block"></div>
+        </div>
+
+        <!-- Phase 2 (Right - Fixed Visibility) -->
+        <div class="mb-12 flex flex-col md:flex-row items-center w-full reveal" style="transition-delay: 100ms;">
+            <div class="md:w-1/2 w-full hidden md:block"></div>
+            <div
+                class="absolute left-[20px] md:left-1/2 w-6 h-6 bg-white border-4 border-accent rounded-full shadow-[0_0_15px_rgba(244,63,94,0.4)] -translate-x-1/2">
+            </div>
+            <div class="md:w-1/2 w-full pl-12 md:pl-12">
+                <span class="text-accent font-bold tracking-widest text-xs uppercase mb-2 block">Phase 02</span>
+                <h4 class="text-2xl font-bold text-textMain mb-3">Architecture & Synthesis</h4>
+                <p class="text-textMuted leading-relaxed">This is where the magic happens. I construct the n8n
+                    workflows, integrate APIs, engineer precise prompts, and synthesize any cinematic 3D visual assets
+                    required.</p>
+            </div>
+        </div>
+
+        <!-- Phase 3 (Left) -->
+        <div class="flex flex-col md:flex-row items-center w-full reveal" style="transition-delay: 200ms;">
+            <div class="md:w-1/2 w-full md:pr-12 md:text-right pl-12 md:pl-0">
+                <span class="text-green-500 font-bold tracking-widest text-xs uppercase mb-2 block">Phase 03</span>
+                <h4 class="text-2xl font-bold text-textMain mb-3">Deployment & Autonomy</h4>
+                <p class="text-textMuted leading-relaxed">The system goes live. Custom bots take over designated tasks,
+                    workflows execute silently 24/7, and you immediately see a reduction in manual labor hours.</p>
+            </div>
+            <div
+                class="absolute left-[20px] md:left-1/2 w-6 h-6 bg-white border-4 border-green-500 rounded-full shadow-[0_0_15px_rgba(34,197,94,0.4)] -translate-x-1/2">
+            </div>
+            <div class="md:w-1/2 w-full hidden md:block"></div>
+        </div>
+        </div>
+
+        </div>
+    </section>
+
+    <!-- ================= PROJECTS SPOTLIGHT (With Terminal) ================= -->
+    <section id="projects" class="py-24 px-6 bg-white relative z-10 border-y border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal flex flex-col md:flex-row justify-between items-end gap-6">
+                <div>
+                    <h2 class="text-sm font-bold text-brand uppercase tracking-[0.2em] mb-2">Portfolio</h2>
+                    <h3 class="text-4xl md:text-5xl font-extrabold text-textMain">Project Spotlight</h3>
+                </div>
+                <p class="text-textMuted max-w-md text-right hidden md:block">Real-world applications of AI automation
+                    and high-end visual design.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="premium-card p-8 md:p-10 reveal group cursor-pointer">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gray-900 to-gray-700 text-white flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                        <i class="fa-solid fa-clapperboard"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-textMain mb-4">AI-Powered Ad Ecosystem</h4>
+                    <p class="text-textMuted mb-8 leading-relaxed">Spearheaded the creation of high-fidelity, cinematic
+                        AI video ads. Achieved photorealistic results that traditionally require huge agency budgets.
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-bold">Generative
+                            AI</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-bold">Blender 3D</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="premium-card p-8 md:p-10 reveal group cursor-pointer" style="transition-delay: 100ms;">
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand to-brand-dark text-white flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg shadow-indigo-200">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-textMain mb-4">Autonomous n8n Architecture</h4>
+                    <p class="text-textMuted mb-8 leading-relaxed">Engineered complex, self-executing pipelines using
+                        n8n to streamline business logic, integrate APIs, and run operations 24/7 without error.</p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="px-3 py-1 bg-indigo-50 text-brand rounded-lg text-xs font-bold">n8n</span>
+                        <span class="px-3 py-1 bg-indigo-50 text-brand rounded-lg text-xs font-bold">Agentic AI</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 with LIVE TERMINAL -->
+                <div
+                    class="premium-card p-8 md:p-10 reveal md:col-span-2 flex flex-col lg:flex-row items-center gap-10 bg-gradient-to-br from-white to-gray-50">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-accent text-white flex items-center justify-center text-xl shadow-lg">
+                                <i class="fa-solid fa-terminal"></i>
+                            </div>
+                            <h4 class="text-2xl font-bold text-textMain">Custom Agent Development</h4>
+                        </div>
+                        <div class="flex gap-2 mb-6">
+                            <span
+                                class="bg-textMain text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide">AryanBot
+                                Core</span>
+                        </div>
+                        <p class="text-textMuted leading-relaxed">Developed proprietary AI bots tailored for specialized
+                            task execution, integrating directly into business channels to handle data retrieval and
+                            logic autonomously.</p>
+                    </div>
+
+                    <div
+                        class="w-full lg:w-[450px] shrink-0 bg-[#0D1117] rounded-xl p-5 shadow-2xl border border-gray-800 relative overflow-hidden h-[160px] font-mono text-sm text-green-400 group cursor-crosshair">
+                        <div class="flex gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="space-y-2 relative z-10">
+                            <!-- UPDATED BOT NAME IN TERMINAL -->
+                            <div class="terminal-line terminal-line-1">&gt; Initializing AryanBot Core... [OK]</div>
+                            <div class="terminal-line terminal-line-2">&gt; Connecting to n8n webhook... [200]</div>
+                            <div class="terminal-line terminal-line-3 text-white">&gt; Agent Active. Awaiting
+                                Input...<span
+                                    class="animate-pulse bg-white w-2 h-4 inline-block align-middle ml-1"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= THE AI CODEX (12 Pages - SPLIT 11 & 12) ================= -->
+    <section id="ai-codex" class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <span class="text-accent font-bold tracking-[0.2em] uppercase text-sm mb-3 block">Enterprise Knowledge
+                    Hub</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-textMain mb-6">The AI Codex</h2>
+                <p class="text-xl text-textMuted max-w-3xl mx-auto font-light leading-relaxed">A 12-part deep dive into
+                    the reality of Artificial Intelligence. Everything you need to know about the future of automation
+                    and generation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Page 1 to 12 -->
+                <article class="premium-card p-8 lg:col-span-2 reveal flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-textMain">01. The Intelligence Illusion</h3>
+                        </div>
+                        <p class="text-textMuted leading-relaxed mb-4">AI isn't magic; it's advanced mathematics. It
+                            operates on Machine Learning and Neural Networks. We feed the system datasets, and it finds
+                            patterns to predict outputs.</p>
+                    </div>
+                </article>
+
+                <article
+                    class="premium-card p-8 reveal bg-gradient-to-br from-brand to-brand-dark text-white shadow-xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">02. Agentic Flow (n8n)</h3>
+                    </div>
+                    <p class="text-brand-light leading-relaxed mb-6 font-light">Using n8n, we create autonomous "Agents"
+                        that talk to each other. An invisible, tireless digital workforce.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">03. LLMs vs. Legacy Bots</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">Legacy bots use rigid rules. Modern LLMs understand
+                        context and intent, handling queries naturally like a human employee.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal lg:col-span-2">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">04. The BFSI + AI Advantage</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed mb-4">As a B.Com (BFSI) student, I understand financial
+                        logic. I build systems that optimize financial workflows, ensuring compliance and directly
+                        impacting ROI.</p>
+                    <div class="flex gap-4 flex-wrap mt-4">
+                        <span class="bg-gray-100 px-3 py-1 rounded text-sm"><i
+                                class="fa-solid fa-check text-indigo-500 mr-2"></i>Risk Automation</span>
+                        <span class="bg-gray-100 px-3 py-1 rounded text-sm"><i
+                                class="fa-solid fa-check text-indigo-500 mr-2"></i>Data Parsing</span>
+                    </div>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">05. Cinematic Synthesis</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">Integrating generative AI with Blender 3D drastically cuts
+                        production times for high-end video ads.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">06. Custom RAG Integration</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">We connect AI to your internal databases. The AI
+                        "retrieves" your facts, ensuring it speaks accurately about your specific business.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">07. Death of Repetition</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">Automation calculates ROI in "Hours Saved". We free up
+                        human potential by eliminating manual digital chores.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-terminal"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">08. Prompt Psychology</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">A master prompt defines persona, constraints, and format,
+                        unlocking genius-level AI efficiency.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal bg-gray-900 text-white shadow-2xl">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">09. Data Privacy</h3>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed font-light">Enterprise AI uses closed-loop APIs. Your
+                        company data is never used to train public models.</p>
+                </article>
+
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-crosshairs"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">10. Hyper-Personalization</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">AI analyzes user data to generate custom marketing copy on
+                        the fly, significantly boosting conversion rates.</p>
+                </article>
+
+                <!-- SPLIT: Section 11 -->
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-scale-unbalanced"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">11. Ethical Architecture</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed">I enforce "Human-in-the-loop" safeguards, especially in
+                        BFSI applications, ensuring ethical and bias-free decision making.</p>
+                </article>
+
+                <!-- SPLIT: Section 12 -->
+                <article class="premium-card p-8 reveal">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div
+                            class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-textMain">12. Future Implementation</h3>
+                    </div>
+                    <p class="text-textMuted leading-relaxed font-medium">The future belongs to humans augmented by AI.
+                        Implementation starts today. Are you ready?</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PREMIUM FOOTER ================= -->
+    <footer class="bg-textMain pt-24 pb-12 px-6 text-white relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-[600px] h-[600px] bg-brand rounded-full blur-[150px] opacity-20 translate-x-1/2 -translate-y-1/2">
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20 border-b border-gray-800 pb-20">
+                <div>
+                    <h2 class="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">Ready to <br><span
+                            class="text-brand-light">Automate?</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 max-w-md font-light">Let's discuss how custom AI systems can
+                        scale your business.</p>
+                    <a href="mailto:wizart035@gmail.com"
+                        class="inline-flex bg-brand hover:bg-white hover:text-textMain text-white px-10 py-5 rounded-full font-bold transition-all duration-300 text-lg items-center gap-3">
+                        <i class="fa-solid fa-paper-plane"></i> Contact Me
+                    </a>
+                </div>
+                <div class="flex flex-col justify-center space-y-8">
+                    <div class="flex items-center gap-6 group">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gray-800 flex items-center justify-center text-brand-light text-2xl">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 uppercase tracking-widest font-semibold">Email</p>
+                            <p class="text-xl font-medium">wizart035@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-6 group">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-gray-800 flex items-center justify-center text-brand-light text-2xl">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 uppercase tracking-widest font-semibold">Phone</p>
+                            <p class="text-xl font-medium">9203320882</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm font-medium">
+                <p>&copy; 2026 Aryan Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= INTERACTIVE ARYAN BOT WIDGET (SMART TYPING ENABLED) ================= -->
+    <button id="chat-toggle"
+        class="fixed bottom-6 right-6 w-16 h-16 bg-brand hover:bg-brand-dark text-white rounded-full shadow-float flex items-center justify-center text-2xl z-[100] transition-transform hover:scale-110">
+        <i class="fa-solid fa-robot"></i>
+    </button>
+
+    <div id="chatbot-window"
+        class="fixed bottom-28 right-6 w-[350px] bg-white/90 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-2xl z-[90] flex flex-col overflow-hidden">
+        <div class="bg-gradient-to-r from-brand to-accent p-4 text-white flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center"><i
+                        class="fa-solid fa-bolt"></i></div>
+                <div>
+                    <h4 class="font-bold text-sm">Aryan AI Assistant</h4>
+                    <p class="text-xs text-white/70">Powered by Aryan.AI</p>
+                </div>
+            </div>
+            <button id="chat-close" class="text-white/70 hover:text-white"><i
+                    class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+
+        <div id="chat-messages" class="p-4 h-[300px] overflow-y-auto flex flex-col gap-3 bg-slate-50/50 scroll-smooth">
+            <div id="welcome-msg"
+                class="chat-bubble self-start bg-gray-100 text-textMain px-4 py-2 rounded-2xl rounded-tl-none text-sm max-w-[85%] border border-gray-200">
+                Hi! 👋 I'm Aryan's personal AI Assistant. I can help you understand his workflow, skills, or schedule a
+                meeting. What would you like to know?
+            </div>
+        </div>
+
+        <div class="p-3 bg-white border-t border-gray-100">
+            <!-- ENDLESS OPTIONS CONTAINER with More Questions -->
+            <div class="flex gap-2 mb-3 overflow-x-auto pb-2 scrollbar-hide" id="chip-container">
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">Tech
+                    Stack?</button>
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">Pricing?</button>
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">What
+                    is n8n?</button>
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">Your
+                    Skills?</button>
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">Recent
+                    Projects?</button>
+                <button
+                    class="chat-chip shrink-0 bg-brand/10 text-brand px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-brand hover:text-white transition-colors">Location/Contact?</button>
+            </div>
+
+            <!-- ENABLED TYPING INPUT -->
+            <div class="flex items-center gap-2">
+                <input type="text" id="chat-input" placeholder="Type your message..."
+                    class="flex-1 bg-gray-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-brand outline-none transition-all">
+                <button id="chat-send"
+                    class="w-8 h-8 bg-brand hover:bg-brand-dark text-white rounded-full flex items-center justify-center transition-colors cursor-pointer"><i
+                        class="fa-solid fa-paper-plane text-xs"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Scroll Progress Bar Logic
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // Soft Navbar Auto-hide
+        const navbar = document.getElementById('navbar');
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                navbar.classList.add('shadow-sm');
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                navbar.classList.remove('shadow-sm');
+                navbar.style.background = 'rgba(248, 250, 252, 0.85)';
+            }
+            if (scrollTop > lastScrollTop && scrollTop > 150) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // ENDLESS Chatbot Logic & SMART TYPING
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatWindow = document.getElementById('chatbot-window');
+        const chatClose = document.getElementById('chat-close');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatChips = document.querySelectorAll('.chat-chip');
+        const chipContainer = document.getElementById('chip-container');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+
+        // Groq API Configuration
+        const apiKey = "";
+
+        async function callGroqAPI(promptText, systemInstructionText = "") {
+            const url = "https://api.groq.com/openai/v1/chat/completions";
+
+            const messages = [];
+            if (systemInstructionText) {
+                messages.push({ role: "system", content: systemInstructionText });
+            }
+            messages.push({ role: "user", content: promptText });
+
+            const payload = {
+                model: "llama-3.3-70b-versatile",
+                messages: messages,
+                temperature: 0.7,
+                max_tokens: 1024
+            };
+
+            let retries = 0;
+            const maxRetries = 3;
+            // Simple exponential backoff or just wait a bit
+            const delays = [1000, 2000, 4000];
+
+            while (retries <= maxRetries) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${apiKey}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errText = await response.text();
+                        console.error("Groq API Error:", errText);
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    return data.choices?.[0]?.message?.content || "No response generated.";
+                } catch (error) {
+                    console.error("Fetch error:", error);
+                    if (retries === maxRetries) return "Sorry, my AI core is currently offline or overloaded. Please email Aryan directly at wizart035@gmail.com! 🤖";
+                    await new Promise(resolve => setTimeout(resolve, delays[retries]));
+                    retries++;
+                }
+            }
+        }
+
+        // Live Demo Logic
+        const demoBtn = document.getElementById('demo-btn');
+        const demoInput = document.getElementById('demo-input');
+        const demoOutputContainer = document.getElementById('demo-output-container');
+        const demoOutputText = document.getElementById('demo-output-text');
+
+        if (demoBtn && demoInput) {
+            demoBtn.addEventListener('click', async () => {
+                const userIdea = demoInput.value.trim();
+                if (!userIdea) return;
+
+                demoOutputContainer.classList.remove('hidden');
+                demoOutputText.innerHTML = '<span class="animate-pulse">Synthesizing professional prompt...</span>';
+                demoBtn.disabled = true;
+                demoBtn.classList.add('opacity-50');
+
+                const sysPrompt = "You are an expert AI prompt engineer specializing in Midjourney and cinematic Blender 3D renders. Take the user's basic idea and turn it into a highly detailed, comma-separated prompt including lighting, camera angle, style, and atmosphere. Keep it under 50 words. Do not use conversational filler, just output the raw prompt directly.";
+
+                const result = await callGroqAPI(`Enhance this idea: ${userIdea}`, sysPrompt);
+
+                demoOutputText.innerText = result;
+                demoBtn.disabled = false;
+                demoBtn.classList.remove('opacity-50');
+            });
+        }
+
+        chatToggle.addEventListener('click', () => chatWindow.classList.toggle('active'));
+        chatClose.addEventListener('click', () => chatWindow.classList.remove('active'));
+
+        // Randomize welcome message on load
+        const welcomeMsgs = [
+            "Hi! 👋 I'm Aryan's personal AI Assistant. I can help you understand his workflow, skills, or schedule a meeting. What would you like to know?",
+            "Hello there! 🤖 I manage Aryan's portfolio inquiries. Ask me about his tech stack, pricing, or projects!",
+            "Greetings! 🚀 I'm AryanBot. Looking for an AI Architect? Ask me anything about Aryan's skills or how to hire him."
+        ];
+        document.getElementById('welcome-msg').innerText = welcomeMsgs[Math.floor(Math.random() * welcomeMsgs.length)];
+
+        const botSystemPrompt = `You are Aryan's personal AI Assistant. You speak professionally but warmly, and you occasionally use emojis. 
+        Aryan Patel is an AI Architect & Animator. 
+        Skills: n8n Automation, Agentic Workflows, Custom AI Bots, Blender 3D, Adobe CC, AI Video Ads.
+        Education: B.Com (BFSI) 1st year (helps with financial logic).
+        Email: wizart035@gmail.com
+        Phone: +91 9203320882
+        Location: Rewa, India.
+        Always guide people to contact him for hiring, pricing, or custom quotes. Keep your answers brief, concise, and straight to the point (1-3 sentences max). VERY IMPORTANT: Always vary your phrasing. Do not give the exact same response to similar questions. Keep your replies dynamic, fresh, and conversational.`;
+
+        async function processUserMessage(userText) {
+            if (!userText.trim()) return;
+
+            // User message bubble
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-bubble self-end bg-brand text-white px-4 py-2 rounded-2xl rounded-tr-none text-sm max-w-[85%]';
+            userMsg.innerText = userText;
+            chatMessages.appendChild(userMsg);
+
+            chatInput.value = ''; // Clear input
+            chipContainer.style.display = 'none'; // Hide chips while typing
+
+            // Typing indicator (Bot is thinking...)
+            const typing = document.createElement('div');
+            typing.className = 'chat-bubble self-start bg-gray-100 px-4 py-3 rounded-2xl rounded-tl-none flex gap-1 items-center mt-2';
+            typing.innerHTML = '<div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div><div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div><div class="w-2 h-2 bg-gray-400 rounded-full typing-dot"></div>';
+            chatMessages.appendChild(typing);
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Fetch smart response from Groq API
+            const replyText = await callGroqAPI(userText, botSystemPrompt);
+
+            chatMessages.removeChild(typing);
+
+            // Bot message bubble
+            const botMsg = document.createElement('div');
+            botMsg.className = 'chat-bubble self-start bg-gray-100 text-textMain px-4 py-2 rounded-2xl rounded-tl-none text-sm max-w-[85%] border border-gray-200 mt-2 leading-relaxed';
+            botMsg.innerHTML = replyText;
+            chatMessages.appendChild(botMsg);
+
+            // Show endless chips again
+            chipContainer.style.display = 'flex';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Event Listeners for Chat
+        chatChips.forEach(chip => {
+            chip.addEventListener('click', function () {
+                processUserMessage(this.innerText);
+            });
+        });
+
+        chatSend.addEventListener('click', () => {
+            processUserMessage(chatInput.value);
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                processUserMessage(chatInput.value);
+            }
+        });
+    </script>
+</body>
+
+</html>
